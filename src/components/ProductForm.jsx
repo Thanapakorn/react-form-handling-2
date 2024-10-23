@@ -1,24 +1,20 @@
 import { useState } from "react";
 
 function ProductForm() {
-  const [product, setProduct] = useState({
-    name: "",
-    price: "",
-    image: "",
-    description: "",
-  });
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      [name]: value,
-    }));
-  };
+  const [name, setName] = useState("");
+  const [image, setImage] = useState("");
+  const [price, setPrice] = useState(null);
+  const [description, setDescription] = useState("This is a sample product.");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(`Product Created: ${JSON.stringify(product, null, 2)}`);
+    const data = {
+      name: name,
+      image: image,
+      price: price,
+      description: description,
+    };
+    alert(JSON.stringify(data, null, 2));
   };
 
   return (
@@ -32,8 +28,8 @@ function ProductForm() {
             name="name"
             type="text"
             placeholder="Enter name here"
-            value={product.name}
-            onChange={handleChange}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </label>
       </div>
@@ -45,8 +41,8 @@ function ProductForm() {
             name="image"
             type="text"
             placeholder="Enter image url here"
-            value={product.image}
-            onChange={handleChange}
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
           />
         </label>
       </div>
@@ -58,8 +54,8 @@ function ProductForm() {
             name="price"
             type="number"
             placeholder="Enter price here"
-            value={product.price}
-            onChange={handleChange}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
           />
         </label>
       </div>
@@ -70,8 +66,8 @@ function ProductForm() {
             id="description"
             name="description"
             placeholder="Enter description here"
-            value={product.description}
-            onChange={handleChange}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             rows={4}
             cols={30}
           />
